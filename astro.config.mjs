@@ -6,7 +6,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://github.com/InuDog1',
+	site: 'https://InuDog1.github.io',
 	base: '/omarchy-blog',
 	integrations: [mdx(), sitemap()],
 	fonts: [
