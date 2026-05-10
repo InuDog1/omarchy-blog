@@ -2,7 +2,7 @@
 title: 'Omarchy Linuxを快適に。Caelestia ShellとWaybarの導入・設定手順'
 description: 'Arch LinuxベースのOmarchy環境に、Hyprlandと相性の良いCaelestia ShellとWaybarを導入し、モダンなデスクトップ環境を構築する手順を解説します。'
 pubDate: '2026-05-10'
-category: 'Linux & Arch'
+category: 'Arch'
 tags: ['Omarchy', '開発環境']
 ---
 

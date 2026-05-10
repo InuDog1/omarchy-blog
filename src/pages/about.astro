@@ -1,13 +1,12 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import AboutHeroImage from "../assets/profile.jpg";
+import Layout from "../layouts/BlogPost.astro";
 ---
 
 <Layout
 	title="About Me"
 	description="管理人プロフィール"
-	pubDate={new Date('2024-05-10')}
-	heroImage={AboutHeroImage}
+	pubDate={new Date("2024-05-10")}
 >
 	<div class="profile-header">
 		<h2>OMARCHY</h2>
@@ -16,19 +15,22 @@ import Layout from '../layouts/BlogPost.astro';
 
 	<h3>Profile</h3>
 	<p>
-		当ブログ「OMARCHY LOG」の管理人です。<br />
-		ArchベースのOmarchy Linuxや、Hyprlandのカスタマイズ、開発環境の構築などを中心に、洗練されたテックライフについての情報を発信しています。
-	</p>
-	<p>
-		「モダンでモード」なデザインと、機能美を追求したガジェットやソフトウェアに惹かれます。
+		当ブログ「OMARCHY LOG」の管理人InuDogです。<br />
+		ArchベースのLinuxディストリビューションOmarchyや、Hyprlandのカスタマイズ、開発環境の構築などを中心に、洗練されたテックライフについての情報を発信しています。
 	</p>
 
 	<h3>Skills & Interests</h3>
 	<ul>
-		<li><strong>OS:</strong> Arch Linux, Ubuntu</li>
-		<li><strong>Environment:</strong> Hyprland, Neovim, Alacritty</li>
-		<li><strong>Development:</strong> Web Frontend (Astro, React), Python</li>
-		<li><strong>Interests:</strong> Minimalist Desk Setup, Mechanical Keyboards, Photography</li>
+		<li><strong>OS:</strong> Omarchy</li>
+		<li>
+			<strong>Environment:</strong> Hyprland, Caelestia Shell, Waybar, NeoVim
+		</li>
+		<li>
+			<strong>Development:</strong> C#,Python,TypeScript
+		</li>
+		<li>
+			<strong>Interests:</strong> Mechanical Keyboards,Games,Anime,Movies
+		</li>
 	</ul>
 
 	<h3>Contact</h3>
@@ -37,15 +39,43 @@ import Layout from '../layouts/BlogPost.astro';
 	</p>
 
 	<div class="social-links-profile">
-		<a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" class="btn">X (Twitter)</a>
-		<a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="btn">GitHub</a>
+		<a
+			href="https://x.com/inu_FFXIV"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="btn">X (Twitter)</a
+		>
+		<a
+			href="https://github.com/"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="btn">GitHub</a
+		>
 	</div>
 
 	<style>
+		/* 1. 画像の表示位置を一番上に固定し、切り抜き範囲を広げる */
+		:global(.hero-image img) {
+			object-position: 50% 10% !important;
+			aspect-ratio: 16 / 9;
+			height: auto !important;
+			max-height: 500px;
+			object-fit: cover !important;
+		}
+
+		:global(.hero-image) {
+			height: auto !important;
+			max-height: none !important;
+			margin-bottom: 2em;
+		}
+
 		.profile-header {
 			text-align: center;
 			margin-bottom: 3em;
+			/* ヘッダーと画像の間の余白を詰めたい場合はここも調整 */
+			margin-top: 3em;
 		}
+
 		.profile-header h2 {
 			font-size: 2.5em;
 			margin-bottom: 0.2em;
