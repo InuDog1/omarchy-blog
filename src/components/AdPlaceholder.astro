@@ -1,13 +1,13 @@
 ---
 interface Props {
-	type?: 'horizontal' | 'rectangle';
+	type?: "horizontal" | "rectangle";
 	class?: string;
 }
 
-const { type = 'rectangle', class: className } = Astro.props;
+const { type = "rectangle", class: className } = Astro.props;
 ---
 
-<div class={`ad-placeholder ${type} ${className || ''}`}>
+<div class={`ad-placeholder ${type} ${className || ""}`}>
 	<div class="ad-label">Advertisement</div>
 	<!-- Replace this block with your Google AdSense script -->
 </div>
