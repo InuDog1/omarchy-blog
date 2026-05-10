@@ -1,22 +1,23 @@
 ---
 import AdPlaceholder from './AdPlaceholder.astro';
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <aside class="sidebar">
 	<div class="widget profile-widget">
-		<img src="/blog-placeholder-about.jpg" alt="Author" class="avatar" />
+		<img src={`${basePath}/blog-placeholder-about.jpg`} alt="Author" class="avatar" />
 		<h3 class="author-name">OMARCHY</h3>
 		<p class="author-bio">Tech enthusiast, Arch Linux user. Focusing on minimal and mode lifestyles.</p>
-		<a href="/about" class="profile-link">Read More</a>
+		<a href={`${basePath}/about`} class="profile-link">Read More</a>
 	</div>
 
 	<div class="widget category-widget">
 		<h3 class="widget-title">Categories</h3>
 		<ul>
-			<li><a href="/blog">Linux & Arch</a></li>
-			<li><a href="/blog">Development</a></li>
-			<li><a href="/blog">Gadget & Setup</a></li>
-			<li><a href="/blog">Lifestyle</a></li>
+			<li><a href={`${basePath}/blog`}>Linux & Arch</a></li>
+			<li><a href={`${basePath}/blog`}>Development</a></li>
+			<li><a href={`${basePath}/blog`}>Gadget & Setup</a></li>
+			<li><a href={`${basePath}/blog`}>Lifestyle</a></li>
 		</ul>
 	</div>
 
