@@ -1,21 +1,35 @@
 ---
-import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
-import Sidebar from '../components/Sidebar.astro';
-import AdPlaceholder from '../components/AdPlaceholder.astro';
-import ShareButtons from '../components/ShareButtons.astro';
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
+import Sidebar from "../components/Sidebar.astro";
+import AdPlaceholder from "../components/AdPlaceholder.astro";
+import ShareButtons from "../components/ShareButtons.astro";
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="ja">
 	<head>
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-89ZC0TXQ34"
+			is:inline
+		></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag("js", new Date());
+
+			gtag("config", "G-89ZC0TXQ34");
+		</script>
 		<BaseHead title={title} description={description} />
 		<style>
 			.hero-image {
@@ -58,15 +72,22 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 	<body>
 		<Header />
-		
+
 		<div class="layout-container">
 			<main class="main-content">
 				<article>
-					{heroImage && (
-						<div class="hero-image">
-							<Image width={1020} height={510} src={heroImage} alt={title} />
-						</div>
-					)}
+					{
+						heroImage && (
+							<div class="hero-image">
+								<Image
+									width={1020}
+									height={510}
+									src={heroImage}
+									alt={title}
+								/>
+							</div>
+						)
+					}
 					<div class="prose">
 						<div class="title">
 							<div class="date">
@@ -74,7 +95,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 								{
 									updatedDate && (
 										<div class="last-updated-on">
-											Last updated on <FormattedDate date={updatedDate} />
+											Last updated on{" "}
+											<FormattedDate date={updatedDate} />
 										</div>
 									)
 								}
@@ -87,15 +109,15 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						<slot />
 
 						<AdPlaceholder type="horizontal" class="mt-4" />
-						
+
 						<ShareButtons title={title} url={Astro.url.href} />
 					</div>
 				</article>
 			</main>
-			
+
 			<Sidebar />
 		</div>
-		
+
 		<Footer />
 	</body>
 </html>
