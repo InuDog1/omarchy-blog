@@ -1,6 +1,12 @@
 ---
 import AdPlaceholder from './AdPlaceholder.astro';
+import { getCollection } from 'astro:content';
+
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const posts = await getCollection('blog');
+
+// Get unique categories and sort them
+const categories = [...new Set(posts.map((post) => post.data.category).filter(Boolean))].sort();
 ---
 
 <aside class="sidebar">
@@ -14,10 +20,9 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 	<div class="widget category-widget">
 		<h3 class="widget-title">Categories</h3>
 		<ul>
-			<li><a href={`${basePath}/blog`}>Linux & Arch</a></li>
-			<li><a href={`${basePath}/blog`}>Development</a></li>
-			<li><a href={`${basePath}/blog`}>Gadget & Setup</a></li>
-			<li><a href={`${basePath}/blog`}>Lifestyle</a></li>
+			{categories.map((category) => (
+				<li><a href={`${basePath}/category/${encodeURIComponent(category!)}`}>{category}</a></li>
+			))}
 		</ul>
 	</div>
 
