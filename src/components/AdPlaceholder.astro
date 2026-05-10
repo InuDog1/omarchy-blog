@@ -1,0 +1,48 @@
+---
+interface Props {
+	type?: 'horizontal' | 'rectangle';
+	class?: string;
+}
+
+const { type = 'rectangle', class: className } = Astro.props;
+---
+
+<div class={`ad-placeholder ${type} ${className || ''}`}>
+	<div class="ad-label">Advertisement</div>
+	<!-- Replace this block with your Google AdSense script -->
+</div>
+
+<style>
+	.ad-placeholder {
+		background-color: var(--bg-color);
+		border: 1px dashed var(--border-color);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		color: var(--text-muted);
+		margin: 2em auto;
+		border-radius: 4px;
+		font-size: 0.9em;
+		letter-spacing: 0.05em;
+	}
+
+	.ad-label {
+		font-size: 0.7em;
+		text-transform: uppercase;
+		margin-bottom: 0.5em;
+		opacity: 0.5;
+	}
+
+	.horizontal {
+		width: 100%;
+		max-width: 728px;
+		height: 90px;
+	}
+
+	.rectangle {
+		width: 100%;
+		max-width: 300px;
+		height: 250px;
+	}
+</style>

@@ -1,0 +1,61 @@
+---
+interface Props {
+	title: string;
+	url: string;
+}
+
+const { title, url } = Astro.props;
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+---
+
+<div class="share-buttons">
+	<span class="share-label">SHARE</span>
+	<a href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener noreferrer" class="share-btn x" aria-label="Share on X (Twitter)">
+		X
+	</a>
+	<a href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`} target="_blank" rel="noopener noreferrer" class="share-btn facebook" aria-label="Share on Facebook">
+		FB
+	</a>
+	<a href={`https://b.hatena.ne.jp/entry/panel/?url=${encodedUrl}&title=${encodedTitle}`} target="_blank" rel="noopener noreferrer" class="share-btn hatena" aria-label="Share on Hatena Bookmark">
+		B!
+	</a>
+</div>
+
+<style>
+	.share-buttons {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		margin: 3em 0;
+		padding: 1.5em 0;
+		border-top: 1px solid var(--border-color);
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.share-label {
+		font-size: 0.8em;
+		letter-spacing: 0.2em;
+		color: var(--text-muted);
+		margin-right: 1em;
+	}
+
+	.share-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		border: 1px solid var(--border-color);
+		font-size: 0.8em;
+		font-weight: bold;
+		transition: all 0.2s ease;
+	}
+
+	.share-btn:hover {
+		border-color: var(--text-main);
+		background-color: var(--text-main);
+		color: var(--bg-color);
+	}
+</style>

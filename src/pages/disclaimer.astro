@@ -1,0 +1,42 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={`Disclaimer | ${SITE_TITLE}`} description="免責事項" />
+		<style>
+			.legal-content {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 4em 1em;
+				color: var(--text-main);
+			}
+			h1 {
+				font-size: 2em;
+				margin-bottom: 1.5em;
+				text-align: center;
+				border-bottom: 1px solid var(--border-color);
+				padding-bottom: 0.5em;
+			}
+			p {
+				margin-bottom: 1.5em;
+				line-height: 1.8;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="legal-content">
+			<h1>Disclaimer</h1>
+			<p>当サイトからのリンクやバナーなどで移動したサイトで提供される情報、サービス等について一切の責任を負いません。</p>
+			<p>また当サイトのコンテンツ・情報について、できる限り正確な情報を提供するように努めておりますが、正確性や安全性を保証するものではありません。情報が古くなっていることもございます。</p>
+			<p>当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。</p>
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,104 @@
+---
+import AdPlaceholder from './AdPlaceholder.astro';
+---
+
+<aside class="sidebar">
+	<div class="widget profile-widget">
+		<img src="/blog-placeholder-about.jpg" alt="Author" class="avatar" />
+		<h3 class="author-name">OMARCHY</h3>
+		<p class="author-bio">Tech enthusiast, Arch Linux user. Focusing on minimal and mode lifestyles.</p>
+		<a href="/about" class="profile-link">Read More</a>
+	</div>
+
+	<div class="widget category-widget">
+		<h3 class="widget-title">Categories</h3>
+		<ul>
+			<li><a href="/blog">Linux & Arch</a></li>
+			<li><a href="/blog">Development</a></li>
+			<li><a href="/blog">Gadget & Setup</a></li>
+			<li><a href="/blog">Lifestyle</a></li>
+		</ul>
+	</div>
+
+	<div class="widget ad-widget">
+		<AdPlaceholder type="rectangle" />
+	</div>
+</aside>
+
+<style>
+	.widget {
+		margin-bottom: 3em;
+	}
+
+	.profile-widget {
+		text-align: center;
+		padding: 2em;
+		background: var(--bg-color);
+		border: 1px solid var(--border-color);
+		border-radius: 8px;
+	}
+
+	.avatar {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		object-fit: cover;
+		margin: 0 auto 1em;
+		border: 2px solid var(--border-color);
+	}
+
+	.author-name {
+		margin: 0 0 0.5em;
+		font-size: 1.2em;
+		letter-spacing: 0.1em;
+	}
+
+	.author-bio {
+		font-size: 0.9em;
+		color: var(--text-muted);
+		margin-bottom: 1.5em;
+	}
+
+	.profile-link {
+		display: inline-block;
+		padding: 0.5em 1.5em;
+		border: 1px solid var(--text-main);
+		font-size: 0.85em;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.profile-link:hover {
+		background: var(--text-main);
+		color: var(--bg-color);
+	}
+
+	.widget-title {
+		font-size: 1.1em;
+		border-bottom: 1px solid var(--border-color);
+		padding-bottom: 0.5em;
+		margin-bottom: 1em;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.category-widget ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.category-widget li {
+		margin-bottom: 0.8em;
+	}
+
+	.category-widget a {
+		color: var(--text-muted);
+		display: block;
+		transition: color 0.2s;
+	}
+
+	.category-widget a:hover {
+		color: var(--accent);
+	}
+</style>
