@@ -1,11 +1,11 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE } from "../consts";
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 	<head>
 		<BaseHead title={`Disclaimer | ${SITE_TITLE}`} description="免責事項" />
@@ -33,9 +33,15 @@ import { SITE_TITLE } from '../consts';
 		<Header />
 		<main class="legal-content">
 			<h1>Disclaimer</h1>
-			<p>当サイトからのリンクやバナーなどで移動したサイトで提供される情報、サービス等について一切の責任を負いません。</p>
-			<p>また当サイトのコンテンツ・情報について、できる限り正確な情報を提供するように努めておりますが、正確性や安全性を保証するものではありません。情報が古くなっていることもございます。</p>
-			<p>当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。</p>
+			<p>
+				当サイトからのリンクやバナーなどで移動したサイトで提供される情報、サービス等について一切の責任を負いません。
+			</p>
+			<p>
+				また当サイトのコンテンツ・情報について、できる限り正確な情報を提供するように努めておりますが、正確性や安全性を保証するものではありません。情報が古くなっていることもございます。
+			</p>
+			<p>
+				当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。
+			</p>
 		</main>
 		<Footer />
 	</body>
