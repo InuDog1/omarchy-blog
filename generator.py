@@ -105,7 +105,7 @@ def generate_blog_post(posts, api_key=None):
         "max_output_tokens": 8192,
     }
     
-    model_name = "gemini-1.5-flash"
+    model_name = "gemini-3.5-flash"
     logger.info(f"Creating Gemini model '{model_name}'...")
     
     # Standard retries for API robustness
