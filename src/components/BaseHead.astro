@@ -9,11 +9,14 @@ interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
+	ogType?: 'website' | 'article';
+	pubDate?: Date;
+	updatedDate?: Date;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, image = FallbackImage, ogType = 'website', pubDate, updatedDate } = Astro.props;
 
 // 追加: 環境変数からBASE_URLを取得し、末尾のスラッシュを安全に処理する
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -22,6 +25,22 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Google Analytics (GA4) -->
+<script
+	async
+	src="https://www.googletagmanager.com/gtag/js?id=G-89ZC0TXQ34"
+	is:inline
+></script>
+<script is:inline>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag("js", new Date());
+
+	gtag("config", "G-89ZC0TXQ34");
+</script>
 
 <!-- 修正: faviconやsitemapのパスに basePath を追加 -->
 <link rel="icon" type="image/svg+xml" href={`${basePath}/favicon.svg`} />
@@ -50,11 +69,14 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image.src, Astro.url)} />
+{ogType === 'article' && pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
+{ogType === 'article' && updatedDate && <meta property="article:modified_time" content={updatedDate.toISOString()} />}
+
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />

@@ -12,25 +12,43 @@ import ShareButtons from "../components/ShareButtons.astro";
 type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = heroImage ? new URL(heroImage.src, Astro.site).href : new URL(`${basePath}/favicon.svg`, Astro.site).href;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "image": imageUrl,
+  "datePublished": pubDate.toISOString(),
+  ...(updatedDate && { "dateModified": updatedDate.toISOString() }),
+  "author": {
+    "@type": "Person",
+    "name": "InuDog",
+    "url": new URL(`${basePath}/about/`, Astro.site).href
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "OMARCHY LOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": new URL(`${basePath}/favicon.svg`, Astro.site).href
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalURL.href
+  }
+};
 ---
 
 <html lang="ja">
 	<head>
-		<script
-			async
-			src="https://www.googletagmanager.com/gtag/js?id=G-89ZC0TXQ34"
-			is:inline
-		></script>
-		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag("js", new Date());
-
-			gtag("config", "G-89ZC0TXQ34");
-		</script>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} ogType="article" pubDate={pubDate} updatedDate={updatedDate} />
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 		<style>
 			.hero-image {
 				width: 100%;

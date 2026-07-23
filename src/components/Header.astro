@@ -1,12 +1,20 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+interface Props {
+	isHome?: boolean;
+}
+const { isHome = false } = Astro.props;
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <header>
 	<div class="header-inner">
-		<h2><a href={`${basePath}/`} class="site-title">{SITE_TITLE}</a></h2>
+		{isHome ? (
+			<h1 class="logo-text"><a href={`${basePath}/`} class="site-title">{SITE_TITLE}</a></h1>
+		) : (
+			<div class="logo-text"><a href={`${basePath}/`} class="site-title">{SITE_TITLE}</a></div>
+		)}
 		<nav class="internal-links">
 			<HeaderLink href={`${basePath}/`}>HOME</HeaderLink>
 			<HeaderLink href={`${basePath}/blog`}>BLOG</HeaderLink>
@@ -33,13 +41,14 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 		justify-content: space-between;
 		height: 80px;
 	}
-	h2 {
+	.logo-text {
 		margin: 0;
 		font-family: var(--font-heading);
 		font-size: 1.5em;
 		letter-spacing: 0.15em;
+		font-weight: 700;
 	}
-	h2 a.site-title {
+	.logo-text a.site-title {
 		color: var(--text-main);
 		text-decoration: none;
 		border: none;

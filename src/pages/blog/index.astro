@@ -16,9 +16,9 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <BaseHead title={`Blog Posts | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
         <style>
             main {
                 width: 960px;
@@ -87,11 +87,22 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
                     font-size: 1.563em;
                 }
             }
+            .page-title {
+                font-family: var(--font-heading);
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 0.3em;
+                margin-bottom: 2rem;
+                font-size: 2.2rem;
+                letter-spacing: 0.05em;
+                text-align: left;
+                color: var(--text-main);
+            }
         </style>
     </head>
     <body>
         <Header />
         <main>
+            <h1 class="page-title">Blog Posts</h1>
             <section>
                 <ul>
                     {
@@ -102,7 +113,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
                                     {post.data.heroImage && (
                                         <Image width={720} height={360} src={post.data.heroImage} alt="" />
                                     )}
-                                    <h4 class="title">{post.data.title}</h4>
+                                    <h2 class="title">{post.data.title}</h2>
                                     <p class="date">
                                         <FormattedDate date={post.data.pubDate} />
                                     </p>

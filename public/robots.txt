@@ -1,4 +1,4 @@
 User-agent: *
-   Allow: /
+Allow: /
 
-   Sitemap: https://InuDog1.github.io/omarchy-blog/sitemap-index.xml
+Sitemap: https://InuDog1.github.io/omarchy-blog/sitemap-index.xml

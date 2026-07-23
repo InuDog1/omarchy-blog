@@ -13,12 +13,30 @@ const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": SITE_TITLE,
+  "url": canonicalURL.href,
+  "description": SITE_DESCRIPTION,
+  "publisher": {
+    "@type": "Organization",
+    "name": SITE_TITLE,
+    "logo": {
+      "@type": "ImageObject",
+      "url": new URL(`${basePath}/favicon.svg`, Astro.site).href
+    }
+  }
+};
 ---
 
 <!doctype html>
 <html lang="ja">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 		<style>
 			.post-list {
 				list-style-type: none;
@@ -78,7 +96,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 		</style>
 	</head>
 	<body>
-		<Header />
+		<Header isHome={true} />
 		
 		<div class="layout-container">
 			<main class="main-content">
