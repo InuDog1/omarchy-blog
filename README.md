@@ -54,10 +54,46 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## 🤖 Automated Workflow & SEO Indexing
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+このブログは、GitHub Actions による完全自動更新および Google 検索エンジンへの即時インデックス通知に対応しています。
 
-## Credit
+1. **Auto Publish (`auto_post.yml`)**:
+   - 毎日定期実行され、Reddit（`r/omarchy`, `r/hyprland`）の最新 RSS から Gemini API を用いて日本語ブログ記事を自動生成・コミットします。
+2. **Deploy (`deploy.yml`)**:
+   - 記事が生成された後、Astro をビルドして GitHub Pages に自動デプロイします。
+3. **Google Indexing API & IndexNow (`notify_index.py`)**:
+   - デプロイ完了直後に `notify_index.py` が実行され、直近で追加・更新された記事の URL を Google Indexing API（および IndexNow）へ即時通知し、クローラーの巡回を促します。
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+### 🔑 Google Indexing API 設定手順
+
+1. **Google Cloud Platform (GCP)**:
+   - GCP コンソールで新規プロジェクトを作成（または既存プロジェクトを選択）。
+   - **Indexing API** を有効化。
+   - **IAM と管理 > サービスアカウント** からサービスアカウントを作成（例: `blog-indexer@<project>.iam.gserviceaccount.com`）。
+   - 作成したサービスアカウントの **「キー」タブ > 「鍵を追加」 > 「新しい鍵を作成 (JSON)」** を選択し、JSON ファイルを保存。
+2. **Google Search Console (GSC)**:
+   - GSC でサイトプロパティ（`https://InuDog1.github.io/omarchy-blog/`）を開く。
+   - **設定 > ユーザーと権限 > ユーザーを追加** を選択。
+   - GCP のサービスアカウントのメールアドレスを入力し、権限を **「オーナー」**（またはフル権限）として追加。
+3. **GitHub Secrets**:
+   - GitHub リポジトリの **Settings > Secrets and variables > Actions** を開く。
+   - `GOOGLE_INDEXING_CREDENTIALS` を作成し、GCP でダウンロードした JSON ファイルの内容をそのまま貼り付け。
+   - （オプション）Bing / Yandex 向けに `INDEXNOW_KEY` も登録可能。
+
+### 🛠️ ローカルでの手動インデックス通知コマンド
+
+```bash
+# 最新の1件をテスト確認（ドライラン）
+python notify_index.py --dry-run --latest 1
+
+# 最新の3件を通知
+python notify_index.py --latest 3
+
+# 過去の全記事を一括通知
+python notify_index.py --all
+
+# 指定したURLを直接通知
+python notify_index.py --urls https://InuDog1.github.io/omarchy-blog/blog/example-post/
+```
+
